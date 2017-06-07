@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HeroChatClient.Views.RegistrationPage"
+             BackgroundImage="MainBackground">
+    <ScrollView>
+        <StackLayout
+            Padding="30"
+            VerticalOptions="Center">
+            <Image 
+                Source="Chat"
+                Aspect="AspectFit"/>
+            <Frame
+                BackgroundColor="#c7623e"
+                CornerRadius="13">
+                <StackLayout>
+                    <Entry 
+                        x:Name="UsernameEntry"
+                        Placeholder="Username"
+                        Style="{StaticResource Key=EntryStyle}"/>
+                    <Entry 
+                        x:Name="PasswordEntry"
+                        Placeholder="Password" 
+                        Style="{StaticResource Key=EntryStyle}"/>
+                    <Entry 
+                        x:Name="FirstNameEntry"
+                        Placeholder="First Name" 
+                        Style="{StaticResource Key=EntryStyle}"/>
+                    <Entry 
+                        x:Name="LastNameEntry"
+                        Placeholder="Last Name" 
+                        Style="{StaticResource Key=EntryStyle}"/>
+                    <Entry 
+                        x:Name="EmailEntry"
+                        Placeholder="Email" 
+                        Style="{StaticResource Key=EntryStyle}"/>
+                    <Entry 
+                        x:Name="CountryEntry"
+                        Placeholder="Country" 
+                        Style="{StaticResource Key=EntryStyle}"/>
+                    <Entry 
+                        x:Name="AgeEntry"
+                        Placeholder="Age" 
+                        Style="{StaticResource Key=EntryStyle}"/>
+                </StackLayout>
+            </Frame>
+            <Button 
+                x:Name="SignUpBtn"
+                Text="Sign Up"
+                BorderRadius="20"
+                Style="{StaticResource Key=BaseButtonStyle}"
+                />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

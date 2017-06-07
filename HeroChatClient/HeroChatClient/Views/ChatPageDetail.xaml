@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HeroChatClient.Views.ChatPageDetail"
+             Title="HeroChat">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelChatPageStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Small"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid 
+        Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <StackLayout 
+            Orientation="Horizontal" Grid.Row="0" >
+            <Image 
+                HorizontalOptions="Start" 
+                Source="batman" 
+                Aspect="AspectFit"/>
+            <StackLayout 
+                Orientation="Vertical" 
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Label x:Name="Username" Text="Username" FontSize="Large" FontAttributes="Bold" TextColor="LawnGreen"/>
+                <Label Text="First Name: " Style="{StaticResource Key=LabelChatPageStyle}"/>
+                <Label Text="Country: " Style="{StaticResource Key=LabelChatPageStyle}"/>
+                <Label Text="Age: " Style="{StaticResource Key=LabelChatPageStyle}"/>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout 
+            Orientation="Vertical" 
+            Grid.Row="1">
+            <ListView
+                x:Name="MessageListView"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="True"
+                SelectedItem="{Binding SelectedMessage, Mode=TwoWay}"
+                ItemSelected="OnItemSelected"
+                ItemsSource="{Binding Messages}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell 
+                            Text="{Binding Message}" 
+                            Detail="{Binding Time}"
+                            TextColor="Black">
+                            <TextCell.ContextActions>
+                                <MenuItem
+                                    Text="Delete"
+                                    IsDestructive="True"
+                                    Clicked="MenuItem_Clicked"
+                                    CommandParameter="{Binding .}"/>
+                            </TextCell.ContextActions>
+                        </TextCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout Orientation="Horizontal">
+                <Entry 
+                    x:Name="messageEntry"
+                    HorizontalOptions="FillAndExpand"/>
+                <Button 
+                    x:Name="SendMessageBtn"
+                    Text="SEND"
+                    BackgroundColor="#c7623e" 
+                    HorizontalOptions="End"
+                    Clicked="SendMessageBtn_Clicked"/>
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</ContentPage>

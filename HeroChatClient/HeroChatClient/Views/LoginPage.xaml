@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:HeroChatClient"
+             x:Class="HeroChatClient.LoginPage"
+             BackgroundImage="MainBackground">
+    <ScrollView>
+        <StackLayout 
+                VerticalOptions="Center"
+                Padding="40"
+                Spacing="20">
+            <Image 
+                    Source="Logo"
+                    Aspect="AspectFit"/>
+            <Frame 
+                    CornerRadius="13"
+                    BackgroundColor="#c7623e"
+                    Padding="20">
+                <StackLayout 
+                        VerticalOptions="Center">
+                    <Entry 
+                            x:Name="UsernameEntry"
+                            Placeholder="Username"
+                            HorizontalTextAlignment="Center"
+                            Style="{StaticResource Key=EntryStyle}"/>
+                    <Entry 
+                            x:Name="PasswordEntry"
+                            Placeholder="Password"
+                            HorizontalTextAlignment="Center"
+                            IsPassword="True"
+                            Style="{StaticResource Key=EntryStyle}"/>
+                </StackLayout>
+            </Frame>
+            <StackLayout>
+                <Button 
+                        x:Name="SignInBtn"
+                        BorderRadius="20"
+                        Text="Sign In"
+                        Style="{StaticResource Key=BaseButtonStyle}"
+                        Clicked="SignInBtn_OnClicked"/>
+                <Button 
+                        BorderRadius="20"
+                        x:Name="SignUpBtn"
+                        Text="Sign Up"
+                        Style="{StaticResource Key=BaseButtonStyle}"
+                        Clicked="SignUpBtn_OnClicked"/>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>
