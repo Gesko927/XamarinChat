@@ -1,22 +1,19 @@
-﻿using HeroChatClient.Models;
-using Microsoft.AspNet.SignalR.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
+using HeroChatClient.Models;
 using HeroChatClient.Services;
+using Microsoft.AspNet.SignalR.Client;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(ChatService))]
 namespace HeroChatClient.Services
 {
-    class ChatService : IChatService
+    internal class ChatService : IChatService
     {
+        #region Private Fields
         private readonly HubConnection _connection;
         private readonly IHubProxy _proxy;
-
-        public event EventHandler<ChatMessage> OnMessageReceived;
+        #endregion
 
         public ChatService()
         {
@@ -25,32 +22,27 @@ namespace HeroChatClient.Services
         }
 
         #region IChatServices implementation
-
         public async Task JoinRoomTask(string roomName)
         {
             await _proxy.Invoke("JoinRoom", roomName);
         }
-
         public async Task Connect()
         {
             await _connection.Start();
 
-            _proxy.On("GetMessage", (string name, string text) =>
+            _proxy.On("GetMessage", (string name, string text) => OnMessageReceived?.Invoke(this, new ChatMessage
             {
-                OnMessageReceived?.Invoke(this, new ChatMessage
-                {
-                    Text = text,
-                    Name = name,
-                    Time = DateTime.Now.ToString()
-                });
-            });
+                Name = name,
+                Text = text,
+                Time = DateTime.Now.ToString()
+            }));
         }
-
         public async Task Send(ChatMessage message, string roomName)
         {
             await _proxy.Invoke("SendMessage", message.Name, message.Text, roomName);
         }
 
+        public event EventHandler<ChatMessage> OnMessageReceived;
         #endregion
     }
 }

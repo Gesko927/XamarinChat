@@ -17,30 +17,38 @@
                     <Entry 
                         x:Name="UsernameEntry"
                         Placeholder="Username"
+                        Completed="UsernameEntry_OnCompleted"
                         Style="{StaticResource Key=EntryStyle}"/>
                     <Entry 
                         x:Name="PasswordEntry"
                         Placeholder="Password" 
+                        Completed="PasswordEntry_OnCompleted"
                         Style="{StaticResource Key=EntryStyle}"/>
                     <Entry 
                         x:Name="FirstNameEntry"
                         Placeholder="First Name" 
+                        Completed="FirstNameEntry_OnCompleted"
                         Style="{StaticResource Key=EntryStyle}"/>
                     <Entry 
                         x:Name="LastNameEntry"
-                        Placeholder="Last Name" 
+                        Placeholder="Last Name"
+                        Completed="LastNameEntry_OnCompleted"
                         Style="{StaticResource Key=EntryStyle}"/>
                     <Entry 
                         x:Name="EmailEntry"
-                        Placeholder="Email" 
+                        Placeholder="Email"
+                        Completed="EmailEntry_OnCompleted"
                         Style="{StaticResource Key=EntryStyle}"/>
                     <Entry 
                         x:Name="CountryEntry"
-                        Placeholder="Country" 
+                        Placeholder="Country"
+                        Completed="CountryEntry_OnCompleted"
                         Style="{StaticResource Key=EntryStyle}"/>
                     <Entry 
                         x:Name="AgeEntry"
                         Placeholder="Age" 
+                        Completed="AgeEntry_OnCompleted"
+                        Keyboard="Numeric"
                         Style="{StaticResource Key=EntryStyle}"/>
                 </StackLayout>
             </Frame>
@@ -49,7 +57,7 @@
                 Text="Sign Up"
                 BorderRadius="20"
                 Style="{StaticResource Key=BaseButtonStyle}"
-                />
+                Clicked="SignUpBtn_OnClicked"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

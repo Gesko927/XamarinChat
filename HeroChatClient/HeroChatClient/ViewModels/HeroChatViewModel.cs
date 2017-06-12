@@ -7,44 +7,51 @@ using Xamarin.Forms;
 
 namespace HeroChatClient.ViewModels
 {
-    class ChatDetailViewModel : BaseViewModel
+    class HeroChatViewModel : BaseViewModel
     {
-        private IChatService _chatService;
-        private string _username;
-        private string _roomName = "PrivateRoom";
-        public ICommand SendMessageCommmand { get; private set; }
-        public ICommand SelectMessageListCommand { get; private set; }
-        public ICommand DeleteMessageCommand { get; private set; }
-
-        public ObservableCollection<ChatMessage> Messages { get; set; }
-
+        #region Private Fields
+        private readonly IChatService _chatService;
+        private const string RoomName = "PrivateRoom";
         private ChatMessage _selectedMessage;
+        #endregion
+
+        #region Public Properties
+        public ObservableCollection<ChatMessage> Messages { get; set; }
+        public User User { get; }
         public ChatMessage SelectedMessage
         {
             get => _selectedMessage;
             set => SetValue(ref _selectedMessage, value);
         }
+        #endregion
 
-        public ChatDetailViewModel(string username)
+        #region Commands
+        public ICommand SendMessageCommmand { get; }
+        public ICommand SelectMessageListCommand { get; }
+        public ICommand DeleteMessageCommand { get; }
+        public ICommand JoinRoomCommand { get; }
+        #endregion
+
+        public HeroChatViewModel(User user)
         {
             #region Command Initialization
 
             SendMessageCommmand = new Command<string>(text => ExecuteSendMessageCommand(text));
             SelectMessageListCommand = new Command<ChatMessage>(message => ExecuteSelectMessageListCommand(message));
             DeleteMessageCommand = new Command<ChatMessage>(message => ExecuteDeleteMessageCommand(message));
+            JoinRoomCommand = new Command(() => _chatService.JoinRoomTask(RoomName));
 
             #endregion
 
-            _selectedMessage = new ChatMessage();
+            User = user;
             Messages = new ObservableCollection<ChatMessage>();
-            _username = username;
+
+            _selectedMessage = new ChatMessage();
 
             _chatService = DependencyService.Get<IChatService>();
             _chatService.Connect();
             _chatService.OnMessageReceived += _chatService_OnMessageReceived;
-            _chatService.JoinRoomTask(_roomName);
         }
-
         private void _chatService_OnMessageReceived(object sender, ChatMessage e)
         {
             Messages.Add(new ChatMessage { Name = e.Name, Text = e.Text, Time = DateTime.Now.ToString() });
@@ -55,15 +62,12 @@ namespace HeroChatClient.ViewModels
         {
             Messages.Remove(message);
         }
-
         #endregion
 
         #region Send Button Command
         private void ExecuteSendMessageCommand(string message)
         {
-            _chatService.Send(new ChatMessage { Name = "User", Text = message, Time = DateTime.Now.ToString() },_roomName);
-
-            Messages.Add(new ChatMessage { Name = "User", Text = message, Time = DateTime.Now.ToString() });
+            _chatService.Send(new ChatMessage { Name = User.Username, Text = message, Time = DateTime.Now.ToString() },RoomName);
         }
         #endregion
 
@@ -75,7 +79,6 @@ namespace HeroChatClient.ViewModels
 
             SelectedMessage = null;
         }
-
         #endregion
     }
 }

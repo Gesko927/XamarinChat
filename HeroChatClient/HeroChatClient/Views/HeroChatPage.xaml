@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HeroChatClient.Views.ChatPageDetail"
+             xmlns:models="clr-namespace:HeroChatClient.Models;assembly=HeroChatClient"
+             x:Class="HeroChatClient.Views.HeroChatPage"
              Title="HeroChat">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -12,6 +13,11 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Join to Channel" Clicked="JoinMenuItem_OnClicked" Order="Secondary"/>
+        <ToolbarItem Text="Settings" Clicked="SettingMenuItem_OnClicked" Order="Secondary"/>
+        <ToolbarItem Text="Sign Out" Clicked="SignOutMenuItem_OnClicked" Order="Secondary"/>
+    </ContentPage.ToolbarItems>
     <Grid 
         Padding="20">
         <Grid.RowDefinitions>
@@ -28,10 +34,14 @@
                 Orientation="Vertical" 
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
-                <Label x:Name="Username" Text="Username" FontSize="Large" FontAttributes="Bold" TextColor="LawnGreen"/>
-                <Label Text="First Name: " Style="{StaticResource Key=LabelChatPageStyle}"/>
-                <Label Text="Country: " Style="{StaticResource Key=LabelChatPageStyle}"/>
-                <Label Text="Age: " Style="{StaticResource Key=LabelChatPageStyle}"/>
+                <Label x:Name="Username" Text="{Binding User.Username}"
+                       FontSize="Large" FontAttributes="Bold" TextColor="#c7623e"/>
+                <Label x:Name="FirstName" Text="{Binding User.FirstName, StringFormat='First Name: {0}'}" 
+                       Style="{StaticResource Key=LabelChatPageStyle}"/>
+                <Label x:Name="Country" Text="{Binding User.Country, StringFormat='Country: {0}'}" 
+                       Style="{StaticResource Key=LabelChatPageStyle}"/>
+                <Label x:Name="Age" Text="{Binding User.Age, StringFormat='Age: {0}'}" 
+                       Style="{StaticResource Key=LabelChatPageStyle}"/>
             </StackLayout>
         </StackLayout>
         <StackLayout 
@@ -54,7 +64,7 @@
                                 <MenuItem
                                     Text="Delete"
                                     IsDestructive="True"
-                                    Clicked="MenuItem_Clicked"
+                                    Clicked="ListItemContext_Clicked"
                                     CommandParameter="{Binding .}"/>
                             </TextCell.ContextActions>
                         </TextCell>
@@ -63,12 +73,13 @@
             </ListView>
             <StackLayout Orientation="Horizontal">
                 <Entry 
-                    x:Name="messageEntry"
+                    x:Name="MessageEntry"
                     HorizontalOptions="FillAndExpand"/>
                 <Button 
                     x:Name="SendMessageBtn"
                     Text="SEND"
-                    BackgroundColor="#c7623e" 
+                    BackgroundColor="#c7623e"
+                    TextColor="White"
                     HorizontalOptions="End"
                     Clicked="SendMessageBtn_Clicked"/>
             </StackLayout>

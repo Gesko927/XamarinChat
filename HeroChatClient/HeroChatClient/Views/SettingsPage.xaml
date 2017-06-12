@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HeroChatClient.Views.SettingsPage"
+             Title="Settings">
+    <TableView Intent="Form">
+        <TableRoot>
+            <TableSection Title="Main Information">
+                <EntryCell 
+                    x:Name="UsernameEntryCell" Label="Username: "
+                    Text="{Binding User.Username}" Placeholder="Username"
+                    Completed="UsernameEntryCell_OnCompleted"/>
+                <EntryCell 
+                    x:Name="PasswordEntryCell" Label="Password: "
+                    Text="{Binding User.Password}" Placeholder="Password"
+                    Completed="PasswordEntryCell_OnCompleted"/>
+                <EntryCell 
+                    x:Name="EmailEntryCell" Label="Email: "
+                    Text="{Binding User.Email}" Placeholder="Email"
+                    Completed="EmailEntryCell_OnCompleted"/>
+            </TableSection>
+            <TableSection Title="Additional information">
+                <EntryCell 
+                    x:Name="FirstNameEntryCell" Label="First Name: "
+                    Text="{Binding User.FirstName}" Placeholder="First Name"
+                    Completed="FirstNameEntryCell_OnCompleted"/>
+                <EntryCell 
+                    x:Name="LastNameEntryCell" Label="Last Name: "
+                    Text="{Binding User.LastName}" Placeholder="Last Name"
+                    Completed="LastNameEntryCell_OnCompleted"/>
+                <EntryCell 
+                    x:Name="CountryEntryCell" Label="Country: "
+                    Text="{Binding User.Country}" Placeholder="Country"
+                    Completed="CountryEntryCell_OnCompleted"/>
+                <EntryCell 
+                    x:Name="AgeEntryCell" Label="Age: "  Keyboard="Numeric"
+                    Text="{Binding User.Age}" Placeholder="Age"
+                    Completed="AgeEntryCell_OnCompleted"/>
+                <ViewCell>
+                    <StackLayout VerticalOptions="FillAndExpand"
+                                 HorizontalOptions="FillAndExpand">
+                    <Button 
+                        x:Name="SaveButton"
+                        Text="Save and exit"
+                        Clicked="SaveButton_OnClicked"
+                        Style="{StaticResource Key=BaseButtonStyle}"
+                        />
+                    </StackLayout>
+                </ViewCell>
+            </TableSection>
+        </TableRoot>
+    </TableView>
+</ContentPage>

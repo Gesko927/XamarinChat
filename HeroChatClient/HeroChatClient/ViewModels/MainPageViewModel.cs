@@ -4,24 +4,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using HeroChatClient.DBRepository;
+using HeroChatClient.Models;
 using Xamarin.Forms;
 
 namespace HeroChatClient.ViewModels
 {
     class MainPageViewModel : BaseViewModel
     {
-        private readonly IChatService _chatService; 
+        #region Private Fields
+        private readonly SQLiteRepository _repository;
+        #endregion
+
         public MainPageViewModel()
         {
-            _chatService = new ChatService();
+            _repository = new SQLiteRepository("Users.db");
         }
 
-        private Command _signInPressedCommand;
-        public Command SignInPressedCommand => _signInPressedCommand ?? (_signInPressedCommand = new Command(ExecuteSignInPressed));
-
-        private void ExecuteSignInPressed(object obj)
+        public bool CheckLoginData(LoginData data)
         {
-            _chatService.Connect();
+            var user = _repository.GetUserByUsername(data.Username);
+
+            if (user != null)
+            {
+                if (user.Password == data.Password)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public User GetUser(string username)
+        {
+            return _repository.GetUserByUsername(username);
         }
     }
 }
