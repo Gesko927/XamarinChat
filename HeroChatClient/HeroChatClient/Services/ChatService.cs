@@ -13,6 +13,7 @@ namespace HeroChatClient.Services
         #region Private Fields
         private readonly HubConnection _connection;
         private readonly IHubProxy _proxy;
+        private readonly string _roomName = "PrivateRoom";
         #endregion
 
         public ChatService()
@@ -22,9 +23,9 @@ namespace HeroChatClient.Services
         }
 
         #region IChatServices implementation
-        public async Task JoinRoomTask(string roomName)
+        public async void JoinRoomTask()
         {
-            await _proxy.Invoke("JoinRoom", roomName);
+            await _proxy.Invoke("JoinRoom", _roomName);
         }
         public async Task Connect()
         {
@@ -37,9 +38,9 @@ namespace HeroChatClient.Services
                 Time = DateTime.Now.ToString()
             }));
         }
-        public async Task Send(ChatMessage message, string roomName)
+        public async Task Send(ChatMessage message)
         {
-            await _proxy.Invoke("SendMessage", message.Name, message.Text, roomName);
+            await _proxy.Invoke("SendMessage", message.Name, message.Text, _roomName);
         }
 
         public event EventHandler<ChatMessage> OnMessageReceived;

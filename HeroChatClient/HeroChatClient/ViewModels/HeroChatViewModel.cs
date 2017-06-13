@@ -11,7 +11,6 @@ namespace HeroChatClient.ViewModels
     {
         #region Private Fields
         private readonly IChatService _chatService;
-        private const string RoomName = "PrivateRoom";
         private ChatMessage _selectedMessage;
         #endregion
 
@@ -30,17 +29,17 @@ namespace HeroChatClient.ViewModels
         public ICommand SelectMessageListCommand { get; }
         public ICommand DeleteMessageCommand { get; }
         public ICommand JoinRoomCommand { get; }
+        public ICommand DisconnectCommand { get; }
         #endregion
 
         public HeroChatViewModel(User user)
         {
             #region Command Initialization
-
             SendMessageCommmand = new Command<string>(text => ExecuteSendMessageCommand(text));
             SelectMessageListCommand = new Command<ChatMessage>(message => ExecuteSelectMessageListCommand(message));
             DeleteMessageCommand = new Command<ChatMessage>(message => ExecuteDeleteMessageCommand(message));
-            JoinRoomCommand = new Command(() => _chatService.JoinRoomTask(RoomName));
-
+            JoinRoomCommand = new Command(ExecuteJoinRoomMessage);
+            DisconnectCommand = new Command(ExecuteDisconnectCommand);
             #endregion
 
             User = user;
@@ -57,6 +56,13 @@ namespace HeroChatClient.ViewModels
             Messages.Add(new ChatMessage { Name = e.Name, Text = e.Text, Time = DateTime.Now.ToString() });
         }
 
+        #region Join Room Command
+        private void ExecuteJoinRoomMessage()
+        {
+            _chatService.JoinRoomTask();
+        }
+        #endregion  
+
         #region Delete Message Command
         private void ExecuteDeleteMessageCommand(ChatMessage message)
         {
@@ -67,7 +73,14 @@ namespace HeroChatClient.ViewModels
         #region Send Button Command
         private void ExecuteSendMessageCommand(string message)
         {
-            _chatService.Send(new ChatMessage { Name = User.Username, Text = message, Time = DateTime.Now.ToString() },RoomName);
+            _chatService.Send(new ChatMessage { Name = User.Username, Text = message, Time = DateTime.Now.ToString() });
+        }
+        #endregion
+
+        #region Disconnect Command
+        private void ExecuteDisconnectCommand()
+        {
+            _chatService.Disconnect();
         }
         #endregion
 

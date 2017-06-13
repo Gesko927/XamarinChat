@@ -3,13 +3,13 @@ using HeroChatClient.Models;
 
 namespace HeroChatClient.ViewModels
 {
-    class MainPageViewModel : BaseViewModel
+    class LoginPageViewModel : BaseViewModel
     {
         #region Private Fields
         private readonly SQLiteRepository _repository;
         #endregion
 
-        public MainPageViewModel()
+        public LoginPageViewModel()
         {
             _repository = new SQLiteRepository("Users.db");
         }

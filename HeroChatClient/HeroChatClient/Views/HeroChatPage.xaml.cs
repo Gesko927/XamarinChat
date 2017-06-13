@@ -47,10 +47,6 @@ namespace HeroChatClient.Views
         }
 
         #region MenuItem Clicked Events
-        private void JoinMenuItem_OnClicked(object sender, EventArgs e)
-        {
-            (BindingContext as HeroChatViewModel)?.JoinRoomCommand.Execute("");
-        }
         private async void SettingMenuItem_OnClicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new NavigationPage(new SettingsPage(_currentUser)));
@@ -58,9 +54,10 @@ namespace HeroChatClient.Views
         private async void SignOutMenuItem_OnClicked(object sender, EventArgs e)
         {
             var res = await DisplayAlert("Sign Out", "Do you really want to change account?", "Yes", "No");
-            if(res) Navigation.PopModalAsync();
+            if (!res) return;
+            (BindingContext as HeroChatViewModel)?.DisconnectCommand.Execute(null);
+            await Navigation.PopModalAsync();
         }
-
         #endregion
 
     }

@@ -11,14 +11,21 @@ namespace HeroChatClient
         public LoginPage()
         {
             InitializeComponent();
-            BindingContext = new MainPageViewModel();
+            BindingContext = new LoginPageViewModel();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            UsernameEntry.Text = "";
+            PasswordEntry.Text = "";
         }
 
         private async void SignInBtn_OnClicked(object sender, EventArgs e)
         {
-            var mainPageViewModel = BindingContext as MainPageViewModel;
+            var loginPageViewModel = BindingContext as LoginPageViewModel;
 
-            var result = mainPageViewModel != null && mainPageViewModel.CheckLoginData(new LoginData
+            var result = loginPageViewModel != null && loginPageViewModel.CheckLoginData(new LoginData
             {
                 Password = PasswordEntry.Text,
                 Username = UsernameEntry.Text
@@ -27,7 +34,7 @@ namespace HeroChatClient
             if (result)
             {
                 await Navigation.PushModalAsync(new NavigationPage(
-                    new HeroChatPage(mainPageViewModel.GetUser(UsernameEntry.Text))));
+                    new HeroChatPage(loginPageViewModel.GetUser(UsernameEntry.Text))));
             }
             else
             {

@@ -1,5 +1,4 @@
 ﻿using System;
-using HeroChatClient.Exceptions;
 using HeroChatClient.Models;
 using HeroChatClient.Services;
 using HeroChatClient.ViewModels;

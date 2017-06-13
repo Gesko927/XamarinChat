@@ -7,8 +7,9 @@ namespace HeroChatClient.Services
     interface IChatService
     {
         Task Connect();
-        Task Send(ChatMessage message, string roomName);
-        Task JoinRoomTask(string roomName);
+        Task Send(ChatMessage message);
+        void JoinRoomTask();
+        void Disconnect();
 
         event EventHandler<ChatMessage> OnMessageReceived;
     }

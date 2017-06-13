@@ -14,7 +14,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Join to Channel" Clicked="JoinMenuItem_OnClicked" Order="Secondary"/>
+        <ToolbarItem Text="Join to Channel" Command="{Binding JoinRoomCommand}" Order="Secondary"/>
         <ToolbarItem Text="Settings" Clicked="SettingMenuItem_OnClicked" Order="Secondary"/>
         <ToolbarItem Text="Sign Out" Clicked="SignOutMenuItem_OnClicked" Order="Secondary"/>
     </ContentPage.ToolbarItems>

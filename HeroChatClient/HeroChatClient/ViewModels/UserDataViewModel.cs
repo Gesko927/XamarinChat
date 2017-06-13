@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using HeroChatClient.DBRepository;
-using HeroChatClient.Exceptions;
 using HeroChatClient.Models;
 using HeroChatClient.Services;
 
