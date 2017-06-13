@@ -55,9 +55,10 @@ namespace HeroChatClient.Views
         {
             await Navigation.PushModalAsync(new NavigationPage(new SettingsPage(_currentUser)));
         }
-        private void SignOutMenuItem_OnClicked(object sender, EventArgs e)
+        private async void SignOutMenuItem_OnClicked(object sender, EventArgs e)
         {
-            Navigation.PopModalAsync();
+            var res = await DisplayAlert("Sign Out", "Do you really want to change account?", "Yes", "No");
+            if(res) Navigation.PopModalAsync();
         }
 
         #endregion

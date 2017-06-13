@@ -1,13 +1,5 @@
-﻿using HeroChatClient.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using HeroChatClient.DBRepository;
+﻿using HeroChatClient.DBRepository;
 using HeroChatClient.Models;
-using Xamarin.Forms;
 
 namespace HeroChatClient.ViewModels
 {

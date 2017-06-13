@@ -44,5 +44,10 @@ namespace HeroChatClient.Services
 
         public event EventHandler<ChatMessage> OnMessageReceived;
         #endregion
+
+        public void Disconnect()
+        {
+            _connection.Stop();
+        }
     }
 }

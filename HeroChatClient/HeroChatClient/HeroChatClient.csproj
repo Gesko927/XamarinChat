@@ -45,8 +45,9 @@
     <Compile Include="Services\IChatService.cs" />
     <Compile Include="DBRepository\ISQLiteDB.cs" />
     <Compile Include="DBRepository\SQLiteRepository.cs" />
-    <Compile Include="ViewModels\RegistrationViewModel.cs" />
-    <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="Services\IPageService.cs" />
+    <Compile Include="Services\PageService.cs" />
+    <Compile Include="ViewModels\UserDataViewModel.cs" />
     <Compile Include="Views\HeroChatPage.xaml.cs">
       <DependentUpon>HeroChatPage.xaml</DependentUpon>
     </Compile>
@@ -122,6 +123,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
